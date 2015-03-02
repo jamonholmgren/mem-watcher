@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    mem-watcher (0.1.0)
+    mem-watcher (0.2.0)
 
 GEM
   remote: https://rubygems.org/
