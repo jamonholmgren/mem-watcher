@@ -31,7 +31,7 @@ MemWatcher.watch(env: [ "development", "test" ])
 If you want to attach the view to another view, provide it:
 
 ```ruby
-MemWatcher.watch(parent_view: "development")
+MemWatcher.watch(parent_view: @my_other_view)
 ```
 
 ### Caveats
