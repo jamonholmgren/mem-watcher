@@ -19,6 +19,19 @@ class MemWatcher
     puts "done."
   end
 
+  def label
+    @label ||= begin
+      l = UILabel.alloc.initWithFrame(self.frame)
+      l.backgroundColor = UIColor.colorWithWhite(1.0, alpha: 0.8)
+      l.layer.cornerRadius = 5
+      l.layer.masksToBounds = true
+      l.font = UIFont.systemFontOfSize(10.0)
+      l.text = "Loading..."
+      l.sizeToFit
+      l
+    end
+  end
+
   private
 
   def correct_env?(args={})
@@ -46,19 +59,6 @@ class MemWatcher
   def cpu_memory
     output = `ps -p #{pid} -o %cpu,%mem`
     output.split("\n").last.strip.split(" ").map(&:strip)
-  end
-
-  def label
-    @label ||= begin
-      l = UILabel.alloc.initWithFrame(self.frame)
-      l.backgroundColor = UIColor.colorWithWhite(1.0, alpha: 0.8)
-      l.layer.cornerRadius = 5
-      l.layer.masksToBounds = true
-      l.font = UIFont.systemFontOfSize(10.0)
-      l.text = "Loading..."
-      l.sizeToFit
-      l
-    end
   end
 
 end
