@@ -4,6 +4,8 @@ Helps you keep an eye on your RubyMotion iOS app's memory and CPU usage.
 
 Adds a little UILabel in the top left of the screen that shows CPU % and memory usage in MB.
 
+![screenshot](http://clrsight.co/jh/2015-03-02-lo7s3.png?+)
+
 ## Setup/Usage
 
 ```ruby
