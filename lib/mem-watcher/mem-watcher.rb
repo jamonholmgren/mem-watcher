@@ -17,6 +17,7 @@ class MemWatcher
     print "Starting MemWatcher..."
     start_watcher
     puts "done."
+    self
   end
 
   def label

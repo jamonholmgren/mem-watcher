@@ -36,10 +36,25 @@ If you want to attach the view to another view, provide it:
 MemWatcher.watch(parent_view: @my_other_view)
 ```
 
+If you want to specify your own frame, provide it:
+
+```ruby
+MemWatcher.watch(frame: [[ 300, 600 ], [ 50, 50 ] ])
+```
+
+Note that the UILabel will `resizeToFit` every tick, so the size is irrelevant.
+
+You can access the label directly if you want.
+
+```ruby
+watcher = MemWatcher.watch
+watcher.label.backgroundColor = UIColor.blueColor
+```
+
 ### Caveats
 
 * It only reports on the current app main process.
-* I have no idea how accurate it is. It does accurately show memory leaks, from what I can see.
+* I have no idea how accurate it is. It does accurately show purposely introduced memory leaks, from what I can see.
 
 ## Contributing
 
