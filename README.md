@@ -24,7 +24,7 @@ end
 
 ### Options
 
-The `env:` option controls what environments MemWatcher will watch in. It defaults to `"development"` and can be a string or array of acceptable RubyMotion environments.
+The `env:` option controls the environments that will activate MemWatcher. It defaults to `"development"` and can be a string or array of acceptable RubyMotion environments.
 
 ```ruby
 MemWatcher.watch(env: [ "development", "test" ])

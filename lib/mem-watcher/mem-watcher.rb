@@ -1,6 +1,7 @@
 class MemWatcher
   attr_accessor :memory
   attr_accessor :cpu
+  attr_accessor :frame
 
   def self.watch(args={})
     new.watch(args)
@@ -8,6 +9,7 @@ class MemWatcher
 
   def watch(args={})
     return false unless correct_env?(args)
+    self.frame = args[:frame] || [[ 5, 20 ], [ 50, 24 ]]
     parent_view = args[:parent_view] if args[:parent_view]
     parent_view ||= UIApplication.sharedApplication.delegate.window if UIApplication.sharedApplication.delegate.respond_to?(:window)
     parent_view || abort("MemWatcher needs a `parent_view:` view or access to the window in your AppDelegate via a `window` accessor.")
@@ -48,7 +50,7 @@ class MemWatcher
 
   def label
     @label ||= begin
-      l = UILabel.alloc.initWithFrame([[ 5, 20 ], [ 50, 24 ]])
+      l = UILabel.alloc.initWithFrame(self.frame)
       l.backgroundColor = UIColor.colorWithWhite(1.0, alpha: 0.8)
       l.layer.cornerRadius = 5
       l.layer.masksToBounds = true
