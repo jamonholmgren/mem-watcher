@@ -8,16 +8,33 @@ class MemWatcher
 
   def watch(args={})
     return false unless correct_env?(args)
-    parent_view = args[:parent_view] if args[:parent_view]
-    parent_view ||= UIApplication.sharedApplication.delegate.window if UIApplication.sharedApplication.delegate.respond_to?(:window)
-    parent_view || abort("MemWatcher needs a `parent_view:` view or access to the window in your AppDelegate via a `window` accessor.")
-    parent_view.addSubview label
-    print "Starting MemWatcher..."
-    start_watcher
-    puts "done."
+    if is_device?
+      NSLog("Sorry, you can not run mem-watcher on a device.")
+      false
+    else
+      parent_view = args[:parent_view] if args[:parent_view]
+      parent_view ||= UIApplication.sharedApplication.delegate.window if UIApplication.sharedApplication.delegate.respond_to?(:window)
+      parent_view || abort("MemWatcher needs a `parent_view:` view or access to the window in your AppDelegate via a `window` accessor.")
+      parent_view.addSubview label
+      print "Starting MemWatcher..."
+      start_watcher
+      puts "done."
+
+      true
+    end
   end
 
   private
+
+  def is_device?
+    @_device_state ||= begin
+      if UIDevice.currentDevice.systemVersion.to_i >= 9
+        !!NSBundle.mainBundle.bundlePath.start_with?('/var/')
+      else
+        !!(UIDevice.currentDevice.model =~ /simulator/i).nil?
+      end
+    end
+  end
 
   def correct_env?(args={})
     args[:env] ||= [ "development" ]
@@ -60,4 +77,3 @@ class MemWatcher
   end
 
 end
-
